@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ex3</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class= "container">
+    <div style="margin-left: 60px">
+        <form th:action="@{/logout}" method="post">
+            <button id="logout" class="btn btn-primary" type="submit" style="margin-right: 10px;float: right;">Logout</button>
+        </form>
+        <h1>History</h1>
+
+
+        <button id = "err_msg" type="button" class="btn btn-danger btn-block todo_btn col-6" style="display: none;margin-top: 10px"></button>
+        <button id = "info_msg" type="button" class="btn btn-success btn-block todo_btn col-6" style="display: none;margin-top: 10px"></button>
+    </div>
+
+
+
+    <div class="col" style="margin: 5%" >
+        <div id = "history" class="card border-info mb-3" style="max-width: 30rem; margin-right: 10px; display: block">
+            <div class="card-header">
+                <div class="row">
+                    <h5 class="col-8">List of popular searches</h5>
+                </div>
+            </div >
+            <div id = "data" class="card-body text-info">
+                <ul th:if="${users != null}" th:each="user : ${users}">
+                    <li>
+                        <a th:href="${user.link}" th:text="${user.userName}" ></a>
+                        <span th:text="': ' + ${user.numOfSearches}" ></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <button id="destroy" class="btn btn-primary" type="button" style="margin-right: 10px;float: left">Delete History</button>
+        <a  th:href="@{/}" class="btn btn-primary" style="float: left; color: white;">Back to Search</a>
+    </div>
+
+</div>
+<script>
+    // event listeners
+      document.addEventListener('DOMContentLoaded', function () {
+           document.getElementById("destroy").addEventListener("click", delete_data);
+       }, false);
+
+       function delete_data(){
+          // document.getElementById("results").style.display = "block";
+           //var user_name = document.getElementById("input").value.trim();
+           fetch('/delete', {
+               method: 'post',
+               headers: {
+                   'Content-Type': 'application/json'
+               }
+               })
+               .then(res => res.json())
+               .then(resp => {
+                   let res = "";
+                   res += resp.msg;
+                   document.getElementById("data").innerHTML = res;
+                 //  document.getElementById("results").style.display = "block";
+               })
+               .catch(e => {
+                   console.log(e);
+                   //document.getElementById("data").innerHTML = "user not found";
+               });
+       }
+
+
+</script>
+
+
+</body>
+</html>

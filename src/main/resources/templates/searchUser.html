@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ex3</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class = "container" >
+    <div style="margin-left: 60px">
+        <form th:action="@{/logout}" method="post">
+            <button id="logout" class="btn btn-primary" type="submit" style="margin-right: 10px;float: right;">Logout</button>
+        </form>
+        <h1>Github search</h1>
+        <form action="#" th:action="@{/search}" th:object="${user}" method="post">
+            <input id="input" name="userName" type="text" class="form-control col-6" placeholder="Enter name..." aria-label="Enter name..." style="margin-bottom: 10px;">
+            <button id="search" class="btn btn-primary" type="submit" style="margin-right: 10px">Search</button>
+            <!-- <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="text-danger"></span>-->
+        </form>
+
+        <button id = "err_msg" type="button" class="btn btn-danger btn-block todo_btn col-6" style="display: none;margin-top: 10px"></button>
+        <button id = "info_msg" type="button" class="btn btn-success btn-block todo_btn col-6" style="display: none;margin-top: 10px"></button>
+    </div>
+
+
+
+    <div class="col" style="margin: 5%" >
+        <div id = "results" class="card border-info mb-3 col-4" style=" margin-right: 5px; display: block">
+            <div class="card-header">
+                    <h5>Result</h5>
+            </div >
+            <div class="card-body text-info">
+                <h5 th:if="${login != null}" th:text="'Login: ' + ${login}" ></h5>
+                <h5 th:if="${followers != null}" th:text="'Followers: ' + ${followers}" ></h5>
+                <h3 id = "msg" th:if="${errorMsg != null}" th:text="${errorMsg}" style="color: red"></h3>
+            </div>
+        </div>
+        <a th:href="@{/history}" class="btn btn-primary" style="float: left; color: white;">
+            Show history
+        </a>
+    </div>
+
+</div>
+
+<script>
+      // event listeners
+   /*   document.addEventListener('DOMContentLoaded', function () {
+          document.getElementById("results").addEventListener("click", get_data);
+      }, false);
+
+      function get_data(){
+          document.getElementById("results").style.display = "block";
+        /*  var user_name = document.getElementById("input").value.trim();
+          fetch('/search', {
+              method: 'post',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: user_name
+              })
+              .then(res => res.json())
+              .then(resp => {
+                  let res = "";
+                  if(resp.login == undefined)
+                      res += resp.msg;
+                  else
+                      res += "user: " + resp.login + "</br>followers: " + resp.followers;
+                  document.getElementById("data").innerHTML = res;
+                  document.getElementById("results").style.display = "block";
+              })
+              .catch(e => {
+                  console.log(e);
+                  document.getElementById("data").innerHTML = "user not found";
+              });
+      }*/
+
+
+</script>
+</body>
+</html>
