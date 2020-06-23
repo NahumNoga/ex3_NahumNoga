@@ -11,7 +11,7 @@
         <input id="password_input" name="password" type="password" class="form-control col-6" placeholder="Password..." aria-label="Password..." style="margin-bottom: 10px;">
         <button id="login_btn" class="btn btn-primary" type="submit" style="margin-right: 10px">Login</button>
     </form>
-    <h3 id = "err_msg" th:text="${msg}" style="display: block;margin-top: 10px"></h3>
+    <h3 id = "msg" th:if="${errorMsg != null}" th:text="${errorMsg}" style="color: red"></h3>
     <button id = "info_msg" type="button" class="btn btn-success btn-block todo_btn col-6" style="display: none;margin-top: 10px"></button>
 </div>
 

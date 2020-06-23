@@ -19,7 +19,7 @@ public class LoginController {
     private String password;
 
     @GetMapping("/login")
-    public String checkLogin(Model model, HttpSession session){
+    public String login(Model model, HttpSession session){
       /*  System.out.println("hello login");
         if(session.getAttribute("loggedIn") == null){
             session.setAttribute("loggedIn", false);
@@ -33,17 +33,15 @@ public class LoginController {
         }*/
 
        return "login";
-
-
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam(name="userName") String name,
-                        @RequestParam(name="password") String pwd, HttpServletRequest request, Model model){
+    public String checkLogin(@RequestParam(name="userName") String name,
+                            @RequestParam(name="password") String pwd, HttpServletRequest request, Model model){
         String errorMsg;
         if( !name.equals(user) || !pwd.equals(password)){
             errorMsg = "Wrong data";
-            model.addAttribute("msg", errorMsg);
+            model.addAttribute("errorMsg", errorMsg);
             return "login";
         }
 
