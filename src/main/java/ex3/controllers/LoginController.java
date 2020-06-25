@@ -1,5 +1,7 @@
 package ex3.controllers;
 
+import ex3.beans.UserSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +20,9 @@ public class LoginController {
     private String user;
     @Value("${password}")
     private String password;
+
+    @Resource(name="us")
+    private UserSession userSession;
 
     @GetMapping("/login")
     public String login(Model model, HttpSession session){
@@ -45,14 +51,16 @@ public class LoginController {
             return "login";
         }
 
-        request.getSession().setAttribute("loggedIn", true);
+        userSession.setLogged(true);
+        //request.getSession().setAttribute("loggedIn", true);
 
         return "redirect:/";
     }
 
     @PostMapping("/logout")
     public String logout(HttpServletRequest request){
-        request.getSession().setAttribute("loggedIn", false);
+        //request.getSession().setAttribute("loggedIn", false);
+        userSession.setLogged(false);
         return "redirect:/login";
     }
 }
