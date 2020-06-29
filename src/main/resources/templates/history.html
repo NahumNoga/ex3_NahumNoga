@@ -51,10 +51,14 @@
                })
                .then(res => res.json())
                .then(resp => {
-                   let res = "";
-                   res += resp.msg;
-                   document.getElementById("data").innerHTML = res;
-                 //  document.getElementById("results").style.display = "block";
+                   if(resp.success == "1"){
+                       let res = "";
+                       res += resp.msg;
+                       document.getElementById("data").innerHTML = res;
+                   }
+                   else{
+                       window.location.href= "/login";
+                   }
                })
                .catch(e => {
                    console.log(e);

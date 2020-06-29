@@ -11,7 +11,7 @@
         <form action="#" th:action="@{/search}" th:object="${user}" method="post">
             <input id="input" name="userName" type="text" class="form-control col-6" placeholder="Enter name..." aria-label="Enter name..." style="margin-bottom: 10px;">
             <button id="search" class="btn btn-primary" type="submit" style="margin-right: 10px">Search</button>
-            <!-- <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="text-danger"></span>-->
+            <!--<span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="text-danger"></span>-->
         </form>
 
         <button id = "err_msg" type="button" class="btn btn-danger btn-block todo_btn col-6" style="display: none;margin-top: 10px"></button>

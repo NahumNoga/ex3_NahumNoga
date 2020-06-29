@@ -45,23 +45,16 @@ public class SearchController {
         JSONObject json = JsonReader.readJsonFromUrl(url);
         if(!result.hasErrors()){
             if(json.getString("success").equals("1")){
-                //  user.setUserName(json.getString("login"));
-
-                if(checkUser(userName)){
-                    User currUser = getRepo().findByUserName(userName);
-                    long numOfSerch = currUser.getNumOfSearches();
-                    numOfSerch++;
-                    currUser.setNumOfSearches(numOfSerch);
-                    getRepo().save(currUser);
-                   // return "searchUser";
+                synchronized (getRepo()) {
+                    if (checkUser(userName)) {
+                        User currUser = getRepo().findByUserName(userName);
+                        currUser.setNumOfSearches(currUser.getNumOfSearches() + 1);
+                    } else {
+                        user.setNumOfSearches(1);
+                        user.setLink(json.getString("html_url"));
+                        getRepo().save(user);
+                    }
                 }
-                else{
-                    user.setNumOfSearches(1);
-                    user.setLink(json.getString("html_url"));
-                    getRepo().save(user);
-                }
-
-                //UserRepository repo = (UserRepository) this.context.getBean(UserRepository.class);
 
                 model.addAttribute("login", json.getString("login"));
                 String numOfFollowers = json.getString("followers");
