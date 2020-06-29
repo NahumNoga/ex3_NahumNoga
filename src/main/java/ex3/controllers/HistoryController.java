@@ -30,12 +30,7 @@ public class HistoryController {
         return "history";
     }
 
-    @PostMapping("/delete")
-    public @ResponseBody String delete() throws JSONException {
-        getRepo().deleteAll();
-        JSONObject json = new JSONObject("{\"msg\": \"history deleted\"}");
-        return json.toString();
-    }
+
 
 
 

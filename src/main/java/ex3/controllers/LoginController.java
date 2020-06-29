@@ -41,7 +41,7 @@ public class LoginController {
        return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login/register")
     public String checkLogin(@RequestParam(name="userName") String name,
                             @RequestParam(name="password") String pwd, HttpServletRequest request, Model model){
         String errorMsg;
@@ -57,7 +57,7 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @PostMapping("/logout")
+    @PostMapping("login/logout")
     public String logout(HttpServletRequest request){
         //request.getSession().setAttribute("loggedIn", false);
         userSession.setLogged(false);

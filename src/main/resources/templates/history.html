@@ -4,7 +4,7 @@
 <body>
 <div class= "container">
     <div style="margin-left: 60px">
-        <form th:action="@{/logout}" method="post">
+        <form th:action="@{login/logout}" method="post">
             <button id="logout" class="btn btn-primary" type="submit" style="margin-right: 10px;float: right;">Logout</button>
         </form>
         <h1>History</h1>
@@ -43,7 +43,7 @@
        function delete_data(){
           // document.getElementById("results").style.display = "block";
            //var user_name = document.getElementById("input").value.trim();
-           fetch('/delete', {
+           fetch('/api/delete-history', {
                method: 'post',
                headers: {
                    'Content-Type': 'application/json'
