@@ -1,17 +1,33 @@
 package ex3.controllers;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * class ErrController
+ * handle errors and exceptions that happen in the application
+ */
 @Controller
 public class ErrController implements ErrorController {
 
+    /**
+     * handle error
+     * display a friendly error page
+     * @return template of html page
+     */
     @RequestMapping("/error")
     public String handleError() {
         return "error";
     }
 
+    /**
+     * handle error
+     * @return path to error page
+     */
     @Override
     public String getErrorPath() {
         return "/error";

@@ -45,6 +45,8 @@ public class SearchController {
         JSONObject json = JsonReader.readJsonFromUrl(url);
         if(!result.hasErrors()){
             if(json.getString("success").equals("1")){
+                user.setUserName(user.getUserName().toLowerCase());
+                userName = userName.toLowerCase();
                 synchronized (getRepo()) {
                     if (checkUser(userName)) {
                         User currUser = getRepo().findByUserName(userName);

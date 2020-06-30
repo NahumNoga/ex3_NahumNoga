@@ -24,7 +24,6 @@ public class User {
     @NotBlank(message = "link is mandatory")
     private String link;
     private long numOfSearches;
-   // private long numOfFollowers;
 
     /**
      * default constructor
@@ -39,7 +38,6 @@ public class User {
     public User(String name, String urlPath){
         this.userName = name;
         this.link = urlPath;
-        //TODO: numOFsearches?
     }
 
     /**
@@ -83,14 +81,6 @@ public class User {
      * @param numOfSearches - the num of searches that done about him
      */
     public void setNumOfSearches(long numOfSearches) { this.numOfSearches = numOfSearches; }
-
-   /* public void setNumOfFollowers(long numOfFollowers) {
-        this.numOfFollowers = numOfFollowers;
-    }
-
-    public long getNumOfFollowers() {
-        return numOfFollowers;
-    }*/
 
     /**
      * get num of searches
