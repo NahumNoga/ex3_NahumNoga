@@ -11,11 +11,7 @@
         <form action="#" th:action="@{/search}" th:object="${user}" method="post">
             <input id="input" name="userName" type="text" class="form-control col-6" placeholder="Enter name..." aria-label="Enter name..." style="margin-bottom: 10px;">
             <button id="search" class="btn btn-primary" type="submit" style="margin-right: 10px">Search</button>
-            <!--<span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="text-danger"></span>-->
         </form>
-
-        <button id = "err_msg" type="button" class="btn btn-danger btn-block todo_btn col-6" style="display: none;margin-top: 10px"></button>
-        <button id = "info_msg" type="button" class="btn btn-success btn-block todo_btn col-6" style="display: none;margin-top: 10px"></button>
     </div>
 
 
@@ -31,46 +27,8 @@
                 <h3 id = "msg" th:if="${errorMsg != null}" th:text="${errorMsg}" style="color: red"></h3>
             </div>
         </div>
-        <a th:href="@{/history}" class="btn btn-primary" style="float: left; color: white;">
-            Show history
-        </a>
+        <a th:href="@{/history}" class="btn btn-primary" style="float: left; color: white;">Show history</a>
     </div>
-
 </div>
-
-<script>
-      // event listeners
-   /*   document.addEventListener('DOMContentLoaded', function () {
-          document.getElementById("results").addEventListener("click", get_data);
-      }, false);
-
-      function get_data(){
-          document.getElementById("results").style.display = "block";
-        /*  var user_name = document.getElementById("input").value.trim();
-          fetch('/search', {
-              method: 'post',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: user_name
-              })
-              .then(res => res.json())
-              .then(resp => {
-                  let res = "";
-                  if(resp.login == undefined)
-                      res += resp.msg;
-                  else
-                      res += "user: " + resp.login + "</br>followers: " + resp.followers;
-                  document.getElementById("data").innerHTML = res;
-                  document.getElementById("results").style.display = "block";
-              })
-              .catch(e => {
-                  console.log(e);
-                  document.getElementById("data").innerHTML = "user not found";
-              });
-      }*/
-
-
-</script>
 </body>
 </html>

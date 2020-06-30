@@ -10,56 +10,67 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
+/**
+ * class LoginController
+ * controller of the login page
+ */
 @Controller
 public class LoginController {
 
+    // value from application.properties
     @Value("${user}")
     private String user;
     @Value("${password}")
     private String password;
 
+    // the session bean
     @Resource(name="us")
     private UserSession userSession;
 
+    /**
+     * login
+     * display the login page
+     * @param model -model of spring
+     * @return- template of html page
+     */
     @GetMapping("/login")
-    public String login(Model model, HttpSession session){
-      /*  System.out.println("hello login");
-        if(session.getAttribute("loggedIn") == null){
-            session.setAttribute("loggedIn", false);
-        }
-        Boolean logged = (Boolean)session.getAttribute("loggedIn");
-        if(logged){
-            return "searchUser";
-        }
-        else{
-            return "login";
-        }*/
-
+    public String login(Model model){
        return "login";
     }
 
+    /**
+     * register
+     * check the input of the user and if its ok transfer to main page of web
+     * @param name- name of the user
+     * @param pwd- password of the user
+     * @param model- model of spring
+     * @return - the search (main) page if allowed and login page if not
+     */
     @PostMapping("/login/register")
-    public String checkLogin(@RequestParam(name="userName") String name,
-                            @RequestParam(name="password") String pwd, HttpServletRequest request, Model model){
+    public String register(@RequestParam(name="userName") String name,
+                            @RequestParam(name="password") String pwd, Model model){
         String errorMsg;
         if( !name.equals(user) || !pwd.equals(password)){
             errorMsg = "Wrong data";
             model.addAttribute("errorMsg", errorMsg);
             return "login";
         }
-
+        // set session that logged
         userSession.setLogged(true);
-        //request.getSession().setAttribute("loggedIn", true);
 
+        // to landing page
         return "redirect:/";
     }
 
+    /**
+     * logout
+     * upadte the session and redirect to login page
+     * @param model- model of spring
+     * @return - login page
+     */
     @PostMapping("login/logout")
-    public String logout(HttpServletRequest request){
-        //request.getSession().setAttribute("loggedIn", false);
+    public String logout(Model model){
         userSession.setLogged(false);
         return "redirect:/login";
     }
