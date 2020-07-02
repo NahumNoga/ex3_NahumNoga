@@ -23,7 +23,7 @@ public class Ex3Application {
 
     /**
      * the bean of the user session
-     * @return new instnce of the session bean
+     * @return new instance of the session bean
      */
     @Bean
     @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)

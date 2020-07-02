@@ -34,7 +34,7 @@ public class SearchController {
      * landing page
      * the main page of web
      * @param model- model of spring
-     * @return- template of html page
+     * @return - template of html page
      */
     @GetMapping("/")
     public String landingPage(Model model){
@@ -49,7 +49,7 @@ public class SearchController {
      * @param result- binding result
      * @param model- model of spring
      * @return template of search html page with the injections of the model
-     * @throws IOException- if there I|O exceptions
+     * @throws IOException - if there I|O exceptions
      * @throws JSONException - if there problem with the Json
      */
     @PostMapping("/search")

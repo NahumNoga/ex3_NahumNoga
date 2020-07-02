@@ -1,11 +1,15 @@
 package ex3.controllers;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * class ErrController
@@ -20,7 +24,16 @@ public class ErrController implements ErrorController {
      * @return template of html page
      */
     @RequestMapping("/error")
-    public String handleError() {
+    public String handleError(HttpServletRequest request, Model model) {
+        Object status = request.getAttribute("javax.servlet.error.status_code");
+        String errMsg = "Something wrong happen..";
+        if(status != null){
+            int statusCode = Integer.parseInt(status.toString());
+            if(statusCode == HttpStatus.NOT_FOUND.value()) {
+                errMsg = "Page not found";
+            }
+        }
+        model.addAttribute("errMsg", errMsg);
         return "error";
     }
 

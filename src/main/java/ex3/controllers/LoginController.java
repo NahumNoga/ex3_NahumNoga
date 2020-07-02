@@ -32,7 +32,7 @@ public class LoginController {
      * login
      * display the login page
      * @param model -model of spring
-     * @return- template of html page
+     * @return - template of html page
      */
     @GetMapping("/login")
     public String login(Model model){

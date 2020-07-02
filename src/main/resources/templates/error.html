@@ -6,7 +6,7 @@
 <body>
 <div class="container">
     <h1>oops error!</h1>
-    <h5>Something wrong happen..</h5>
+    <h5 th:if="${errMsg != null}" th:text="${errMsg}" style="color: red"></h5>
     <span>back to </span><a href="/">Home</a>
 </div>
 </body>

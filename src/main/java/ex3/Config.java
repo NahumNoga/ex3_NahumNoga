@@ -28,6 +28,6 @@ public class Config implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginFilter(userSession)).addPathPatterns("/", "/search/**", "/history/**");
+        registry.addInterceptor(new LoginFilter(userSession)).addPathPatterns("/", "/search/**", "/history/**", "/api");
     }
 }
